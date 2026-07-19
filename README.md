@@ -15,9 +15,16 @@ Honest-voting slice, spatial electorate (voters and candidates as points; utilit
 
 | method | VSE |
 |---|---|
-| plurality | 0.686 |
-| approval | 0.914 |
 | score (0–5) | 0.979 |
+| STAR | 0.975 |
+| minimax (Condorcet) | 0.970 |
+| approval | 0.914 |
+| IRV | 0.854 |
+| plurality | 0.686 |
+
+Score > STAR > Condorcet > approval ≫ IRV ≫ plurality—the canonical
+honest-voting ordering, including IRV's center squeeze, reproduced rather than
+assumed.
 
 Score is genuine 0–5 integer ballots; discretizing from continuous moves it by
 ~0.0003 — the "roundings scatter and cancel" result, measured rather than
@@ -37,9 +44,8 @@ packages (the Enumerable layer is the seed of kanso's stdlib).
 
 ## Roadmap
 
-- **Rating methods:** STAR (score + automatic runoff), majority judgment.
-- **Ranked methods:** IRV, Borda, Bucklin, a Condorcet variant (minimax /
-  ranked pairs).
+- **Rating methods:** majority judgment.
+- **Ranked methods:** Borda, Bucklin, ranked pairs / Schulze.
 - **Strategic layer:** per-voter viability as a blend of a true poll and a
   random guess at ignorance level α; sweep α from 0 (perfect info) to 1 (pure
   guess) and plot VSE per method — the point being that the method *ranking* is
