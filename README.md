@@ -26,13 +26,14 @@ asserted.
 ## Run
 
 ```
-kanso run vse.kso
+kanso run .
 ```
 
-Single file for now: kanso's module/import system isn't built yet, so the
-`enumerable` / `methods` / `main` layers live in one alphabetically-ordered file.
-Once imports land, this splits into real modules (an Enumerable stdlib, a
-methods library, a thin entry).
+A kanso module is a directory: `enumerable.kso` (fold-rooted collection
+helpers), `methods.kso` (the voting methods), and `main.kso` (electorate
+models, the VSE metric, the Monte Carlo driver) share one namespace, each file
+alphabetically ordered. When cross-module `import` lands these become separate
+packages (the Enumerable layer is the seed of kanso's stdlib).
 
 ## Roadmap
 

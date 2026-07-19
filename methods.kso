@@ -1,0 +1,22 @@
+fn _approval_col voters c
+  total (map voters (v -> _approves v c))
+
+fn _approves v c
+  if (mean v < at v c) 1 0
+
+fn _score_ballot v c
+  lo = minimum v
+  hi = maximum v
+  round (5.0 * (at v c - lo) / (hi - lo))
+
+fn _score_col voters c
+  total (map voters (v -> _score_ballot v c))
+
+fn approval_winner voters
+  argmax (map (range ncand) (c -> _approval_col voters c))
+
+fn plurality_winner voters
+  argmax (map (range ncand) (c -> count (map voters (v -> argmax v)) c))
+
+fn score_winner voters
+  argmax (map (range ncand) (c -> _score_col voters c))
