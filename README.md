@@ -1,7 +1,7 @@
 # vse — voter satisfaction efficiency, in kanso
 
 A Monte-Carlo simulator for comparing voting methods by **Voter Satisfaction
-Efficiency** (VSE), written in [kanso](https://github.com/ClayShentrup/kanso).
+Efficiency** (VSE), written in [kanso](https://github.com/kanso-lang/kanso).
 Modeled on Jameson Quinn's [vse-sim](https://github.com/electionscience/vse-sim).
 
 VSE of a method = `(social utility of the winner − mean candidate utility) /
@@ -12,6 +12,12 @@ is a utilitarian-optimal winner every time; 0.0 is picking at random.
 
 Honest-voting slice, spatial electorate (voters and candidates as points; utility
 = −distance). Runs byte-identical on kanso's interpreter and native engines.
+
+The simulator is also the compiler's memory-model proving ground: a full run —
+a thousand elections, six methods each, about four million loop iterations —
+completes in ~0.11s at a flat **1.9 MB** peak, because the compiler brackets
+the simulation's loops and sweeps each iteration's scratch automatically. No
+annotations in the source; the numbers below never move by a digit.
 
 | method | VSE |
 |---|---|
