@@ -42,11 +42,20 @@ asserted.
 kanso run .
 ```
 
+Each run draws a fresh electorate: kanso seeds its generator from entropy, so
+the numbers move a little while the ordering holds. To reproduce the exact
+table above, pin the stream:
+
+```
+KANSO_SEED=2685821657736338717 kanso run .
+```
+
 A kanso module is a directory: `enumerable.kso` (fold-rooted collection
-helpers), `methods.kso` (the voting methods), and `main.kso` (electorate
-models, the VSE metric, the Monte Carlo driver) share one namespace, each file
-alphabetically ordered. When cross-module `import` lands these become separate
-packages (the Enumerable layer is the seed of kanso's stdlib).
+helpers), `methods.kso` (the voting methods), `sim.kso` (electorate models,
+the VSE metric, the Monte Carlo driver), and `main.kso` (the entry) share one
+namespace, each file alphabetically ordered. The std pieces arrive through
+kanso's import system—`import "std/list"` enrolls `list/map` and friends
+alongside the local helpers, one overload space, specificity picking the arm.
 
 ## Roadmap
 
