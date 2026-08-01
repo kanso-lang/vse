@@ -30,7 +30,7 @@ fn point 0 acc
 fn point d acc
   math/random 1000 . (c -> point (d - 1) (push acc c))
 
-runs = 400
+runs = 40000
 
 fn socutil voters c
   sum (list/map voters (v -> v[c]))

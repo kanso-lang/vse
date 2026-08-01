@@ -14,23 +14,32 @@ Honest-voting slice, spatial electorate (voters and candidates as points; utilit
 = −distance). Runs byte-identical on kanso's interpreter and native engines.
 
 The simulator is also the compiler's memory-model proving ground: a full run —
-a thousand elections, six methods each, about four million loop iterations —
-completes in ~0.11s at a flat **1.9 MB** peak, because the compiler brackets
-the simulation's loops and sweeps each iteration's scratch automatically. No
-annotations in the source; the numbers below never move by a digit.
+forty thousand elections, six methods each, about a hundred and sixty million
+loop iterations — completes in ~9.9s at a flat **2.8 MB** peak, because the
+compiler brackets the simulation's loops and sweeps each iteration's scratch
+automatically. No annotations in the source, and the peak does not grow with
+the trial count.
+
+The dice come from `math/random`, which seeds from entropy, so a run varies
+unless you pin it: `KANSO_SEED=1 ./out` reproduces exactly.
 
 | method | VSE |
 |---|---|
-| score (0–5) | 0.979 |
-| STAR | 0.975 |
-| minimax (Condorcet) | 0.970 |
-| approval | 0.914 |
-| IRV | 0.854 |
-| plurality | 0.686 |
+| STAR | 0.971 |
+| score (0–5) | 0.970 |
+| minimax (Condorcet) | 0.950 |
+| approval | 0.922 |
+| IRV | 0.851 |
+| plurality | 0.674 |
 
-Score > STAR > Condorcet > approval ≫ IRV ≫ plurality—the canonical
+Means over eight seeds at forty thousand trials each, where the figures are
+stable to about a thousandth.
+
+Score and STAR ≫ Condorcet > approval ≫ IRV ≫ plurality—the canonical
 honest-voting ordering, including IRV's center squeeze, reproduced rather than
-assumed.
+assumed. Score and STAR are the one pair this does **not** separate: they land
+within a thousandth of each other and swap places by seed, so the simulation
+says they tie rather than that either wins.
 
 Score is genuine 0–5 integer ballots; discretizing from continuous moves it by
 ~0.0003 — the "roundings scatter and cancel" result, measured rather than
