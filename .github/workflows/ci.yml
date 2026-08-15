@@ -1,0 +1,22 @@
+name: ci
+on:
+  pull_request:
+  push:
+    branches: [main]
+jobs:
+  spec:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+      # Pinned, not floating. A simulation whose gate follows kanso's main
+      # would report a compiler regression as its own, which is how vse's 76%
+      # slowdown came to look like nothing at all for two weeks. Moving the
+      # pin is its own PR, whose diff is the compiler and nothing else.
+      - name: build the pinned kanso toolchain
+        run: |
+          git clone https://github.com/kanso-lang/kanso /tmp/kanso
+          cd /tmp/kanso && git checkout "$(cat $GITHUB_WORKSPACE/.kanso-version)"
+          cargo build --release
+      - name: the simulation still compiles, and still answers the same
+        run: KANSO=/tmp/kanso/target/release/kanso sh spec.sh
