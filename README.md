@@ -15,10 +15,11 @@ Honest-voting slice, spatial electorate (voters and candidates as points; utilit
 
 The simulator is also the compiler's memory-model proving ground: a full run —
 forty thousand elections, six methods each, about a hundred and sixty million
-loop iterations — completes in ~9.9s at a flat **2.8 MB** peak, because the
-compiler brackets the simulation's loops and sweeps each iteration's scratch
-automatically. No annotations in the source, and the peak does not grow with
-the trial count.
+loop iterations — finishes in about 10.6s and peaks at **3.8 MB**, of which
+2.1 MB is arena. The compiler brackets the simulation's loops and sweeps each
+iteration's scratch automatically, with no annotations in the source. Ten
+thousand trials peak at 3.83 MB and forty thousand at 3.82 MB: the peak does
+not grow with the trial count.
 
 The dice come from `math/random`, which seeds from entropy, so a run varies
 unless you pin it: `KANSO_SEED=1 ./out` reproduces exactly.
