@@ -42,6 +42,14 @@ assumed. Score and STAR are the one pair this does **not** separate: they land
 within a thousandth of each other and swap places by seed, so the simulation
 says they tie rather than that either wins.
 
+The tie is expected from what this slice models. STAR's runoff is live — at
+the pinned seed it overturns the score leader in 4,016 of 40,000 elections —
+but honest ballots leave it little to fix: each overturn trades a sliver of
+summed utility for a majority preference, and the two effects net to about
+zero. STAR pulls ahead of score under *strategic* voting, which is the
+roadmap's strategic layer, not modeled here — so this table measures the one
+regime where the two are supposed to agree.
+
 Score is genuine 0–5 integer ballots; discretizing from continuous moves it by
 ~0.0003 — the "roundings scatter and cancel" result, measured rather than
 asserted.
