@@ -13,12 +13,13 @@ fn dist2 p q
   sum (list/map (range (length p)) (d -> sq (p[d] - q[d])))
 
 pub fn means sums
-  print "plurality VSE {sums[1] / runs}"
-    .> (_ -> print "approval  VSE {sums[2] / runs}")
-    .> (_ -> print "score     VSE {sums[3] / runs}")
-    .> (_ -> print "star      VSE {sums[4] / runs}")
-    .> (_ -> print "irv       VSE {sums[5] / runs}")
-    .> (_ -> print "minimax   VSE {sums[6] / runs}")
+  p = "plurality VSE {sums[1] / runs}"
+  a = "approval  VSE {sums[2] / runs}"
+  s = "score     VSE {sums[3] / runs}"
+  t = "star      VSE {sums[4] / runs}"
+  i = "irv       VSE {sums[5] / runs}"
+  m = "minimax   VSE {sums[6] / runs}"
+  print "{p}\n{a}\n{s}\n{t}\n{i}\n{m}"
 
 ncand = 5
 
